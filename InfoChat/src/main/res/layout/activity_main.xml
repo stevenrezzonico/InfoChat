@@ -1,0 +1,94 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:ignore="MergeRootFrame" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:id="@+id/parent">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="true"
+            android:id="@+id/messageArea"
+            android:layout_alignWithParentIfMissing="false"
+            android:layout_alignParentRight="false"
+            android:layout_above="@+id/inputArea">
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#D2D2D2"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/viewMessage"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentBottom="false"
+                android:singleLine="false" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:animationCache="false"
+            android:background="#e3e3e3"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:addStatesFromChildren="false"
+            android:id="@+id/inputArea"
+            android:paddingLeft="10dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/sendButton"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="false">
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textAreaMessage"
+                    android:hint="@string/enterMessageHint"
+                    android:inputType="textImeMultiLine|textMultiLine|textAutoCorrect"
+                    android:singleLine="false"
+                    android:maxLines="4"
+                    android:scrollbarAlwaysDrawVerticalTrack="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="false"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/rounded_edittext"
+                    android:paddingLeft="5dp" />
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sendHint"
+                android:background="@android:color/transparent"
+                android:textColor="#057BFB"
+                android:textSize="20dp"
+                android:id="@+id/sendButton"
+                android:layout_alignParentEnd="true"
+                android:onClick="sendMessage" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>
