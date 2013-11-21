@@ -31,10 +31,10 @@ public class MainActivity extends ActionBarActivity {
 
 	TextView textAreaMessage;
 	EditText editTextMessage;
-    View content;
-    DatagramSocket datagramSocket;
-    DatagramPacket packet;
-    InetAddress local;
+	View content;
+	DatagramSocket datagramSocket;
+	DatagramPacket packet;
+	InetAddress local;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,52 +47,52 @@ public class MainActivity extends ActionBarActivity {
 		}
 		textAreaMessage = (TextView) findViewById(R.id.viewMessage);
 		editTextMessage = (EditText) findViewById(R.id.textAreaMessage);
-        content = this.findViewById(android.R.id.content);
-        try {
-            local = getBroadcastAddress();//my broadcast ip
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast toast = Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT);
-            toast.show();
-        }
+		content = this.findViewById(android.R.id.content);
+		try {
+			local = getBroadcastAddress();//my broadcast ip
+		} catch (IOException e) {
+			e.printStackTrace();
+			Toast toast = Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT);
+			toast.show();
+		}
 
-        try {
-            datagramSocket = new DatagramSocket();
-        } catch (SocketException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            Toast toast = Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT);
-            toast.show();
-        }
+		try {
+			datagramSocket = new DatagramSocket();
+		} catch (SocketException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toast toast = Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT);
+			toast.show();
+		}
 
-        byte[] buffer = new byte[10];
-        packet = new DatagramPacket(buffer, buffer.length);
-        new Thread(new Runnable() {
-            public void run() {
-                while (true){
-                    try {
-                        datagramSocket.receive(packet);
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                        Toast toast = Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-                    final byte[] buff = packet.getData();
-                    content.post(new Runnable() {
-                        public void run() {
-                            receiveMessage("Prova", buff.toString());
-                        }
-                    });
+		byte[] buffer = new byte[10];
+		packet = new DatagramPacket(buffer, buffer.length);
+		new Thread(new Runnable() {
+			public void run() {
+				while (true){
+					try {
+						datagramSocket.receive(packet);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						Toast toast = Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT);
+						toast.show();
+					}
+					final byte[] buff = packet.getData();
+					content.post(new Runnable() {
+						public void run() {
+							receiveMessage("Prova", buff.toString());
+						}
+					});
 
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
 	}
 
 
@@ -115,56 +115,56 @@ public class MainActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-    private InetAddress getBroadcastAddress() throws IOException {
-        WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        DhcpInfo dhcp = wifi.getDhcpInfo();
-        // handle null somehow
+	private InetAddress getBroadcastAddress() throws IOException {
+		WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+		DhcpInfo dhcp = wifi.getDhcpInfo();
+		// handle null somehow
 
-        int broadcast = (dhcp.ipAddress & dhcp.netmask) | ~dhcp.netmask;
-        byte[] quads = new byte[4];
-        for (int k = 0; k < 4; k++)
-            quads[k] = (byte) (broadcast >> (k * 8));
-        return InetAddress.getByAddress(quads);
-    }
+		int broadcast = (dhcp.ipAddress & dhcp.netmask) | ~dhcp.netmask;
+		byte[] quads = new byte[4];
+		for (int k = 0; k < 4; k++)
+			quads[k] = (byte) (broadcast >> (k * 8));
+		return InetAddress.getByAddress(quads);
+	}
 
 
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	public void sendMessage(String destinatario, String message) {
 		textAreaMessage.setText(textAreaMessage.getText() + "\n" + Build.MANUFACTURER + " " + Build.PRODUCT + ": " + message);
 
 
-        int server_port = 5000; //port that I’m using
-        try{
-            DatagramSocket s = new DatagramSocket();
+		int server_port = 5000; //port that I’m using
+		try{
+			DatagramSocket s = new DatagramSocket();
 
-            int msg_length=message.length();
-            byte[] messageByte = message.getBytes();
-            DatagramPacket p = new DatagramPacket(messageByte, msg_length,local,server_port);
-            StrictMode.ThreadPolicy policy = new
-                    StrictMode.ThreadPolicy.Builder()
-                    .permitAll().build();
-            StrictMode.setThreadPolicy(policy);
+			int msg_length=message.length();
+			byte[] messageByte = message.getBytes();
+			DatagramPacket p = new DatagramPacket(messageByte, msg_length,local,server_port);
+			StrictMode.ThreadPolicy policy = new
+					StrictMode.ThreadPolicy.Builder()
+					.permitAll().build();
+			StrictMode.setThreadPolicy(policy);
 
-            s.send(p);
-            Toast toast = Toast.makeText(getApplicationContext(), "message send", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-        catch(Exception e){
-            Toast toast = Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT);
-            toast.show();
-        }
-        editTextMessage.setText("");
+			s.send(p);
+			Toast toast = Toast.makeText(getApplicationContext(), "message send", Toast.LENGTH_SHORT);
+			toast.show();
+		}
+		catch(Exception e){
+			Toast toast = Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT);
+			toast.show();
+		}
+		editTextMessage.setText("");
 	}
-    public void receiveMessage(String mittente, String message){
-        textAreaMessage.setText(textAreaMessage.getText() + "\n" + mittente + ": " + message);
-    }
-    public void buttonSend(View view) {
-        sendMessage("Prova",editTextMessage.getText().toString());
-    }
+	public void receiveMessage(String mittente, String message){
+		textAreaMessage.setText(textAreaMessage.getText() + "\n" + mittente + ": " + message);
+	}
+	public void buttonSend(View view) {
+		sendMessage("Prova",editTextMessage.getText().toString());
+	}
 
 
 
-    /**
+	/**
 	 * A placeholder fragment containing a simple view.
 	 */
 	public static class PlaceholderFragment extends Fragment {
