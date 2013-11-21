@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ProvaConnessione</string>
+    <string name="app_name">InfoChat</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="enterMessageHint">Enter a message</string>
     <string name="sendHint">Send</string>
-    <string name="dialog_message">Inserisci il tuo nome utente</string>
-    <string name="dialog_title">Nome utente</string>
+    <string name="dialog_message">Insert your username</string>
+    <string name="dialog_title">Username</string>
 
 </resources>
