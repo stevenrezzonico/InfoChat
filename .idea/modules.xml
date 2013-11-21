@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/InfoChat/InfoChat.iml" filepath="$PROJECT_DIR$/InfoChat/InfoChat.iml" />
       <module fileurl="file://$PROJECT_DIR$/InfoChatApp.iml" filepath="$PROJECT_DIR$/InfoChatApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProvaConnessioneProject.iml" filepath="$PROJECT_DIR$/ProvaConnessioneProject.iml" />
     </modules>
   </component>
 </project>
