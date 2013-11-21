@@ -27,12 +27,6 @@
             android:layout_alignParentRight="false"
             android:layout_above="@+id/inputArea">
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="#D2D2D2"
-                />
-
             <ScrollView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -51,7 +45,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:animationCache="false"
-            android:background="#e3e3e3"
+            android:background="@drawable/input_area_style"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentEnd="true"
