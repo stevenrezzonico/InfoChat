@@ -33,14 +33,18 @@
                 android:background="#D2D2D2"
                 />
 
-            <TextView
+            <ScrollView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/viewMessage"
-                android:layout_alignParentEnd="false"
-                android:layout_alignParentTop="false"
-                android:layout_alignParentBottom="false"
-                android:singleLine="false" />
+                android:id="@+id/scrollView" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/viewMessage"
+                    android:layout_alignParentEnd="false"
+                    android:singleLine="false" />
+            </ScrollView>
         </RelativeLayout>
 
         <RelativeLayout
