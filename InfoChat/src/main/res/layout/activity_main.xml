@@ -1,10 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:id="@+id/container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".MainActivity"
-                tools:ignore="MergeRootFrame" >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:ignore="MergeRootFrame" >
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -27,18 +27,20 @@
             android:layout_alignParentRight="false"
             android:layout_above="@+id/inputArea">
 
-            <ScrollView
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#D2D2D2"
+                />
+
+            <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/scrollView" >
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/viewMessage"
-                    android:layout_alignParentEnd="false"
-                    android:singleLine="false" />
-            </ScrollView>
+                android:id="@+id/viewMessage"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentBottom="false"
+                android:singleLine="false" />
         </RelativeLayout>
 
         <RelativeLayout
